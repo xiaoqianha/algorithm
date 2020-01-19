@@ -1,0 +1,38 @@
+class Solution {
+public:
+    string simplifyPath(string path) {
+        
+	string a;
+	a=path;
+	stack<string>zhang;
+	int i=0;
+	while(i<a.size())
+	{
+		while(i<a.size()&&a[i]=='/')i++;
+		if(i==a.size())break;
+		string tmp="";
+		while(i<a.size()&&a[i]!='/')
+		{
+			tmp+=a[i++];
+		}
+		if(tmp=="..")
+		{
+			if(!zhang.empty()) 
+			zhang.pop();
+		}
+		else if(tmp!=".")
+		zhang.push(tmp);	
+	}
+	string b="";
+	if(zhang.empty())
+	return "/"; 
+	while(!zhang.empty())
+	{
+		string c=zhang.top();
+		zhang.pop();
+		b='/'+c+b;
+	}
+	return b;
+	return 0;
+ } 
+};
